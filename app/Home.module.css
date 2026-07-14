@@ -29,7 +29,8 @@
 .button{
   cursor: pointer;
   border-radius: 12px;
-  padding: 12px 88px;
+  padding: 12px 0;
+  text-align: center;
   width: 276px;
   height: 44px;
   font-weight: 600;

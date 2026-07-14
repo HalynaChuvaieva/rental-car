@@ -1,136 +1,122 @@
 "use client";
-import { fetchFilters } from "@/lib/api";
-import css from "./Filters.module.css";
-import { useQuery } from "@tanstack/react-query";
-import Loader from "../Loader/Loader";
 
-const formatLabel = (str: string) => {
-  return str
-    .split("_")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-};
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import css from "./Filters.module.css";
+import { fetchFiltersData } from "@/lib/api";
 
 export default function Filters() {
-  const {
-    data: filterOptions,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["camperFilters"],
-    queryFn: fetchFilters,
-    staleTime: 1000 * 60 * 5,
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const { data } = useQuery({
+    queryKey: ["filters"],
+    queryFn: fetchFiltersData,
   });
 
+  const [brand, setBrand] = useState(searchParams.get("brand") || "");
+  const [price, setPrice] = useState(searchParams.get("price") || "");
+  const [minMileage, setMinMileage] = useState(
+    searchParams.get("minMileage") || "",
+  );
+  const [maxMileage, setMaxMileage] = useState(
+    searchParams.get("maxMileage") || "",
+  );
+
+  const priceOptions = [];
+  if (data?.price) {
+    for (let i = data.price.min; i <= data.price.max; i += 10) {
+      priceOptions.push(i);
+    }
+  }
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const params = new URLSearchParams();
+
+    if (brand) params.set("brand", brand);
+    if (price) params.set("price", price);
+    if (minMileage) params.set("minMileage", minMileage);
+    if (maxMileage) params.set("maxMileage", maxMileage);
+
+    router.push(`?${params.toString()}`, { scroll: false });
+  };
+
+  const handleClear = () => {
+    setBrand("");
+    setPrice("");
+    setMinMileage("");
+    setMaxMileage("");
+    router.push("/catalog", { scroll: false });
+  };
+
   return (
-    <aside className={css.sidebar}>
-      <label className={css.label} htmlFor="location">
-        Location
-      </label>
-      <div className={css.location}>
-        <svg className={css.icon} width="20" height="20">
-          <use href="/sprite.svg#map"></use>
-        </svg>
-        <input
-          type="text"
-          id="location"
-          className={css.input}
-          placeholder="City"
-          defaultValue="Kyiv"
-        />
+    <form className={css.filtersForm} onSubmit={handleSearch}>
+      <div className={css.filterGroup}>
+        <label htmlFor="brand">Car brand</label>
+        <select
+          id="brand"
+          value={brand}
+          onChange={(e) => setBrand(e.target.value)}
+          className={css.select}
+        >
+          <option value="">Choose a brand</option>
+          {data?.brands?.map((b: string) => (
+            <option key={b} value={b}>
+              {b}
+            </option>
+          ))}
+        </select>
       </div>
 
-      <h3 className={css.filters}>Filters</h3>
+      <div className={css.filterGroup}>
+        <label htmlFor="price">Price / 1 hour</label>
+        <select
+          id="price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          className={css.select}
+        >
+          <option value="">Choose a price</option>
+          {priceOptions.map((p) => (
+            <option key={p} value={p}>
+              To ${p}
+            </option>
+          ))}
+        </select>
+      </div>
 
-      {isLoading && <Loader />}
-      {isError && <p>Error loading filters. Please try again.</p>}
+      <div className={css.filterGroup}>
+        <label>Car mileage / km</label>
+        <div className={css.mileageInputs}>
+          <input
+            type="number"
+            placeholder="From"
+            value={minMileage}
+            onChange={(e) => setMinMileage(e.target.value)}
+            className={css.inputLeft}
+            min={0}
+          />
+          <input
+            type="number"
+            placeholder="To"
+            value={maxMileage}
+            onChange={(e) => setMaxMileage(e.target.value)}
+            className={css.inputRight}
+            min={0}
+          />
+        </div>
+      </div>
 
-      {filterOptions && (
-        <ul className={css.filtersList}>
-          {/* Camper form */}
-          {filterOptions.forms?.length > 0 && (
-            <li>
-              <h4 className={css.filterTitle}>Camper form</h4>
-              <ul className={css.radioList}>
-                {filterOptions.forms.map((form) => (
-                  <li key={form}>
-                    <label className={css.radioLabel}>
-                      <input
-                        type="radio"
-                        name="camperForm"
-                        value={form}
-                        className={css.visuallyHidden}
-                      />
-                      <span className={css.customRadio}></span>
-                      {formatLabel(form)}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          )}
-
-          {/* Engine */}
-          {filterOptions.engines?.length > 0 && (
-            <li>
-              <h4 className={css.filterTitle}>Engine</h4>
-              <ul className={css.radioList}>
-                {filterOptions.engines.map((engine) => (
-                  <li key={engine}>
-                    <label className={css.radioLabel}>
-                      <input
-                        type="radio"
-                        name="engine"
-                        value={engine}
-                        className={css.visuallyHidden}
-                      />
-                      <span className={css.customRadio}></span>
-                      {formatLabel(engine)}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          )}
-
-          {/* Transmission */}
-          {filterOptions.transmissions?.length > 0 && (
-            <li>
-              <h4 className={css.filterTitle}>Transmission</h4>
-              <ul className={css.radioList}>
-                {filterOptions.transmissions.map((transmission) => (
-                  <li key={transmission}>
-                    <label className={css.radioLabel}>
-                      <input
-                        type="radio"
-                        name="transmission"
-                        value={transmission}
-                        className={css.visuallyHidden}
-                      />
-                      <span className={css.customRadio}></span>
-                      {formatLabel(transmission)}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          )}
-        </ul>
-      )}
-
-      <ul className={css.buttonList}>
-        <li>
-          <button className={css.search}>Search</button>
-        </li>
-        <li>
-          <button className={css.clear}>
-            <svg width="12" height="12" className={css.clearIcon}>
-              <use href="/sprite.svg#clear"></use>
-            </svg>
-            Clear filters
-          </button>
-        </li>
-      </ul>
-    </aside>
+      <div className={css.actions}>
+        <button type="submit" className={css.searchBtn}>
+          Search
+        </button>
+        <button type="button" onClick={handleClear} className={css.clearBtn}>
+          Clear filters
+        </button>
+      </div>
+    </form>
   );
 }

@@ -1,67 +1,8 @@
-.card{
-    border-radius: 16px;
-    padding: 24px;
-    width: 888px;
-    height: 312px;
-    background-color:  #f7f7f7;
-    display: flex;
-    gap: 24px;
-}
-.image{
-    border-radius: 16px;
-}
-.name, .price{
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 1.33;
-    margin: 0;
-}
-.titleWrapper{
-    display: flex;
-    gap: 248px;
-}
-.meta{
-    margin-top: 8px;
-    display: flex;
-    gap: 16px;
-}
-.rating, .location{
-    display: flex;
-    gap: 4px;
-    align-items: center;
-}
-.starIcon{
-    fill: #ffc531;
-}
-.ratingText, .locText{
-    line-height: 1.5;
-    margin: 0;
-}
-.description{
-    margin: 24px 0;
-    line-height: 1.5;
-    color: #475467;
-    display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.badges{
-    display: flex;
-    gap: 8px;
-}
-.badge{
-    border-radius: 100px;
-    padding: 14px 18px;
-    width: 109px;
-    height: 48px;
-    background-color: #f2f4f7;
-}
-.badgeTitle{
-    margin:0;
-    font-weight: 500;
-    line-height: 1.5;
-    text-align: center;
-    display: block;
+.detailItem:not(:last-child)::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 16px;
+  background-color: #dadde1; 
+  margin: 0 6px;
 }

@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.variable}>
+      <body className={manrope.variable}>
         <TanStackProvider>
           <Header />
           <main>{children}</main>
