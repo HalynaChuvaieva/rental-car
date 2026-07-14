@@ -6,20 +6,22 @@
     gap: 32px;
 }
 .header{
-    padding: 28px 64px;
+    padding: 24px 120px;
     display: flex;
     align-items: center;
-    gap: 450px;
-    height: 72px;
-    border-bottom: 1px solid #f2f4f7;
-    background-color: #f7f7f7;
+    justify-content: space-between;
+    height: 68px;
+    border-bottom: 1px solid  #f2f4f7;
+    background-color: #fff;
 }
 .link{
     text-decoration: none;
     font-weight: 500;
     color: inherit;
-    line-height: 1.5;
+    line-height: 1.25;
 }
 .active{
-    color: #829b91;
+    text-decoration: underline;
+    color: #00aad4;
+    text-decoration-skip-ink: none;
 }

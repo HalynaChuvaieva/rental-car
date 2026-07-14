@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import CamperCard from "@/components/CamperCard/CamperCard";
+import CamperCard from "@/components/CarCard/CarCard";
 import css from "./Catalog.module.css";
 import { fetchCampers } from "@/lib/api";
 import Loader from "@/components/Loader/Loader";

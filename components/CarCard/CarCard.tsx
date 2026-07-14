@@ -1,5 +1,5 @@
 import Image from "next/image";
-import css from "./CamperCard.module.css";
+import css from "./CarCard.module.css";
 import { Camper } from "@/types/camper";
 
 interface CamperCardProps {

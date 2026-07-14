@@ -10,12 +10,12 @@ export default function App() {
 
   return (
     <main className={css.homepage}>
-      <h1 className={css.title}>Campers of your dreams</h1>
+      <h1 className={css.title}>Find your perfect rental car</h1>
       <h2 className={css.subtitle}>
-        You can find everything you want in our catalog
+        Reliable and budget-friendly rentals for any journey
       </h2>
       <button onClick={handleClick} className={css.button}>
-        View Now
+        View Catalog
       </button>
     </main>
   );
