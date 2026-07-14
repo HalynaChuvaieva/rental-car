@@ -1,14 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import css from "./Filters.module.css";
 import { fetchFiltersData } from "@/lib/api";
+import CustomSelect, { Option } from "@/components/CustomSelect/CustomSelect";
 
 export default function Filters() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   const { data } = useQuery({
     queryKey: ["filters"],
@@ -26,12 +28,22 @@ export default function Filters() {
 
   const [error, setError] = useState("");
 
-  const priceOptions = [];
+  const priceOptions: Option[] = [];
   if (data?.price) {
     for (let i = data.price.min; i <= data.price.max; i += 10) {
-      priceOptions.push(i);
+      priceOptions.push({
+        value: i,
+        label: i.toString(),
+      });
     }
   }
+
+  const brandOptions: Option[] = data?.brands
+    ? data.brands.map((b: string) => ({
+        value: b,
+        label: b,
+      }))
+    : [];
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,47 +71,34 @@ export default function Filters() {
     setMinMileage("");
     setMaxMileage("");
     setError("");
-    router.push("/catalog", { scroll: false });
+    router.push(pathname, { scroll: false });
   };
 
   return (
     <form className={css.filtersForm} onSubmit={handleSearch}>
       <div className={css.filterGroup}>
-        <label htmlFor="brand">Car brand</label>
-        <select
-          id="brand"
+        <label className={css.label}>Car brand</label>
+        <CustomSelect
+          options={brandOptions}
           value={brand}
-          onChange={(e) => setBrand(e.target.value)}
-          className={css.select}
-        >
-          <option value="">Choose a brand</option>
-          {data?.brands?.map((b: string) => (
-            <option key={b} value={b}>
-              {b}
-            </option>
-          ))}
-        </select>
+          onChange={(val) => setBrand(val as string)}
+          placeholder="Choose a brand"
+        />
       </div>
 
       <div className={css.filterGroup}>
-        <label htmlFor="price">Price / 1 hour</label>
-        <select
-          id="price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          className={css.select}
-        >
-          <option value="">Choose a price</option>
-          {priceOptions.map((p) => (
-            <option key={p} value={p}>
-              To ${p}
-            </option>
-          ))}
-        </select>
+        <label className={css.label}>Price / 1 hour</label>
+        <CustomSelect
+          options={priceOptions}
+          value={price ? Number(price) : ""}
+          onChange={(val) => setPrice(val.toString())}
+          placeholder="Choose a price"
+          prefix="To $"
+        />
       </div>
 
       <div className={css.filterGroup}>
-        <label>Car mileage / km</label>
+        <label className={css.label}>Car mileage / km</label>
         <div className={css.mileageInputs}>
           <input
             type="number"
