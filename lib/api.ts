@@ -1,33 +1,43 @@
-import { Camper } from "@/types/car";
+import { Car } from "@/types/car";
 import axios from "axios";
 
 axios.defaults.baseURL = "https://car-rental-api.goit.study";
 
-interface FetchCampersArgs {
+export interface FetchCarsArgs {
   pageParam?: number;
-  query?: string;
+  brand?: string;
+  price?: number | string;
+  minMileage?: number | string;
+  maxMileage?: number | string;
 }
+
 export interface CarsResponse {
+  cars: Car[];
+  totalCars: number;
   page: number;
-  perPage: number;
-  total: number;
   totalPages: number;
-  cars: Camper[];
 }
 
 export async function fetchCars({
   pageParam = 1,
-  query = "",
-}: FetchCampersArgs): Promise<CarsResponse> {
+  brand,
+  price,
+  minMileage,
+  maxMileage,
+}: FetchCarsArgs): Promise<CarsResponse> {
   const params = {
-    search: query,
     page: pageParam,
-    perPage: 4,
+    perPage: 12,
+    ...(brand && { brand }),
+    ...(price && { price }),
+    ...(minMileage && { minMileage }),
+    ...(maxMileage && { maxMileage }),
   };
 
-  const res = await axios.get<CarsResponse>("/campers", {
+  const res = await axios.get<CarsResponse>("/cars", {
     params,
   });
+
   return res.data;
 }
 
