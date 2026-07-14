@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import css from "./Filters.module.css";
@@ -24,6 +24,8 @@ export default function Filters() {
     searchParams.get("maxMileage") || "",
   );
 
+  const [error, setError] = useState("");
+
   const priceOptions = [];
   if (data?.price) {
     for (let i = data.price.min; i <= data.price.max; i += 10) {
@@ -33,6 +35,14 @@ export default function Filters() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+    if (minMileage && maxMileage) {
+      if (Number(maxMileage) <= Number(minMileage)) {
+        setError("Maximum mileage must be greater than minimum.");
+        return;
+      }
+    }
+
     const params = new URLSearchParams();
 
     if (brand) params.set("brand", brand);
@@ -48,6 +58,7 @@ export default function Filters() {
     setPrice("");
     setMinMileage("");
     setMaxMileage("");
+    setError("");
     router.push("/catalog", { scroll: false });
   };
 
@@ -94,7 +105,10 @@ export default function Filters() {
             type="number"
             placeholder="From"
             value={minMileage}
-            onChange={(e) => setMinMileage(e.target.value)}
+            onChange={(e) => {
+              setMinMileage(e.target.value);
+              setError("");
+            }}
             className={css.inputLeft}
             min={0}
           />
@@ -102,11 +116,27 @@ export default function Filters() {
             type="number"
             placeholder="To"
             value={maxMileage}
-            onChange={(e) => setMaxMileage(e.target.value)}
+            onChange={(e) => {
+              setMaxMileage(e.target.value);
+              setError("");
+            }}
             className={css.inputRight}
-            min={0}
+            min={minMileage ? Number(minMileage) + 1 : 0}
           />
         </div>
+        {error && (
+          <span
+            className={css.errorText}
+            style={{
+              color: "#ec383b",
+              fontSize: "12px",
+              marginTop: "4px",
+              display: "block",
+            }}
+          >
+            {error}
+          </span>
+        )}
       </div>
 
       <div className={css.actions}>

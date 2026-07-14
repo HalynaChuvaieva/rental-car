@@ -6,17 +6,24 @@ import CarCard from "@/components/CarCard/CarCard";
 import css from "./Catalog.module.css";
 import { fetchCars } from "@/lib/api";
 import Loader from "@/components/Loader/Loader";
+import { useSearchParams } from "next/navigation";
 
-interface CatalogClientProps {
-  filters: {
-    brand?: string;
-    price?: number;
-    minMileage?: number;
-    maxMileage?: number;
+export default function CatalogClient() {
+  const searchParams = useSearchParams();
+
+  const filters = {
+    brand: searchParams.get("brand") || undefined,
+    price: searchParams.get("price")
+      ? Number(searchParams.get("price"))
+      : undefined,
+    minMileage: searchParams.get("minMileage")
+      ? Number(searchParams.get("minMileage"))
+      : undefined,
+    maxMileage: searchParams.get("maxMileage")
+      ? Number(searchParams.get("maxMileage"))
+      : undefined,
   };
-}
 
-export default function CatalogClient({ filters }: CatalogClientProps) {
   const { data, status, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: ["cars-list", filters],

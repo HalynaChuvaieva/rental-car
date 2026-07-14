@@ -16,7 +16,7 @@ export default async function CatalogPage({
   const queryClient = new QueryClient();
 
   const filters = {
-    brand: searchParams.brand || "",
+    brand: searchParams.brand || undefined,
     price: searchParams.price ? Number(searchParams.price) : undefined,
     minMileage: searchParams.minMileage
       ? Number(searchParams.minMileage)
@@ -35,8 +35,9 @@ export default async function CatalogPage({
   return (
     <main className={css.container}>
       <Filters />
+
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <CatalogClient filters={filters} />
+        <CatalogClient />
       </HydrationBoundary>
     </main>
   );
