@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import css from "./Filters.module.css";
@@ -27,6 +27,22 @@ export default function Filters() {
   );
 
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      const urlBrand = searchParams.get("brand") || "";
+      const urlPrice = searchParams.get("price") || "";
+      const urlMin = searchParams.get("minMileage") || "";
+      const urlMax = searchParams.get("maxMileage") || "";
+
+      setBrand((prev) => (prev !== urlBrand ? urlBrand : prev));
+      setPrice((prev) => (prev !== urlPrice ? urlPrice : prev));
+      setMinMileage((prev) => (prev !== urlMin ? urlMin : prev));
+      setMaxMileage((prev) => (prev !== urlMax ? urlMax : prev));
+    }, 0);
+
+    return () => clearTimeout(timeoutId);
+  }, [searchParams]);
 
   const priceOptions: Option[] = [];
   if (data?.price) {

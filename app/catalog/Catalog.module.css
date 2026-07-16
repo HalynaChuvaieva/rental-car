@@ -14,5 +14,23 @@
 .carItem{
     flex-basis: calc((100% - 32px * 3) / 4);
     max-width: 276px;
-    max-height: 464px;
+    min-height: 464px;
+}
+.loadMoreBtn{
+    border-radius: 12px;
+    padding: 12px 0;
+    width: 156px;
+    height: 44px;
+    border: 1px solid #00aad4;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.25;
+    font-family: inherit;
+    display: block;
+  cursor: pointer;
+  transition: border-color 250ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  margin: 0 auto;
+}
+.loadMoreBtn:hover{
+    border-color: #0095ba;
 }
