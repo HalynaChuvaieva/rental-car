@@ -2,6 +2,7 @@
     display: flex;
     gap: 16px;
     align-items: flex-start;
+    justify-content: center;
 }
 .label{
     font-weight: 400;

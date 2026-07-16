@@ -53,7 +53,7 @@ export default function CatalogClient() {
         {data.pages.map((page, pageIndex) => (
           <React.Fragment key={pageIndex}>
             {page.cars.map((car) => (
-              <li key={car.id}>
+              <li key={car.id} className={css.carItem}>
                 <CarCard car={car} />
               </li>
             ))}

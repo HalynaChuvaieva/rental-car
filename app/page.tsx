@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 export default function App() {
   const router = useRouter();
   const handleClick = () => {
-    router.push("/catalog/filter/all");
+    router.push("/catalog");
   };
 
   return (

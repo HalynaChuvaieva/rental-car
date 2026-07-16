@@ -6,3 +6,30 @@
   background-color: #dadde1; 
   margin: 0 6px;
 }
+
+.card{
+  border-radius: 16px;
+  padding: 16px;
+  
+  background-color: #fff;
+}
+.image{
+  width: 244px;
+  height: 268px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(18, 20, 23, 0.5) 2.5%, rgba(18, 20, 23, 0) 41.07%);
+}
+.title, .price{
+  margin: 0;
+}
+.title{
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
