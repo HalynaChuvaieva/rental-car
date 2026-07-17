@@ -70,15 +70,14 @@ export default function CatalogClient() {
         ))}
       </ul>
 
-      {hasNextPage && (
-        <button
-          className={css.loadMoreBtn}
-          onClick={() => fetchNextPage()}
-          disabled={isFetchingNextPage}
-        >
-          {isFetchingNextPage ? <Loader /> : "Load more"}
-        </button>
-      )}
+      {hasNextPage &&
+        (isFetchingNextPage ? (
+          <Loader />
+        ) : (
+          <button className={css.loadMoreBtn} onClick={() => fetchNextPage()}>
+            Load more
+          </button>
+        ))}
     </section>
   );
 }

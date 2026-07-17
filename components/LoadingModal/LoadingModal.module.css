@@ -1,25 +1,23 @@
-/* Напівпрозорий фон, що перекриває весь екран */
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(255, 255, 255, 0.7); /* Білий напівпрозорий фон */
-  backdrop-filter: blur(2px); /* Легке розмиття заднього фону */
+  width: 100%;
+  height: 100%;
+  background-color:rgba(245, 245, 245, 0.89); 
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* Щоб модалка була поверх усіх інших елементів */
+  z-index: 9999; 
 }
 
-/* Білий блок модалки */
 .modal {
+  border-radius: 16px;
+  padding: 48px 96px;
   width: 543px;
   height: 288px;
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 24px;
-  box-shadow: 0px 4px 36px rgba(0, 0, 0, 0.05); /* Легка тінь */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,36 +25,18 @@
   text-align: center;
 }
 
-/* Анімований спінер (кільце) */
-.spinner {
-  width: 48px;
-  height: 48px;
-  border: 4px solid #f3f3f3; /* Сіре кільце */
-  border-top: 4px solid #00aad4; /* Синя частина (ваш фірмовий колір) */
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 24px;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Тексти */
 .title {
   font-size: 24px;
   font-weight: 600;
-  color: #121417;
-  margin: 0 0 8px 0;
+  line-height: 1.33;
+  margin: 32px 0 16px;
 }
 
 .text {
-  font-size: 16px;
-  color: #8d929a;
+  font-weight: 500;
+  line-height: 1.25;
   margin: 0;
+  text-align: center;
+  max-width: 280px;
+  font-size: 16px;
 }
