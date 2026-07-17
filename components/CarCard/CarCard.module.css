@@ -66,6 +66,8 @@ background-color: #00aad4;
 border-color: transparent;
 display: block;
   transition: background-color 250ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  text-align: center;
+  text-decoration: none;
 
 }
 .readMoreBtn:hover, .readMoreBtn:active{

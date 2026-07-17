@@ -41,10 +41,10 @@ export async function fetchCars({
   return res.data;
 }
 
-// export async function fetchCamperById(id: string) {
-//   const res = await axios.get<Camper>(`/notes/${id}`);
-//   return res.data;
-// }
+export async function fetchCarById(id: string) {
+  const res = await axios.get<Car>(`/cars/${id}`);
+  return res.data;
+}
 
 interface FilterOptions {
   brands: string[];

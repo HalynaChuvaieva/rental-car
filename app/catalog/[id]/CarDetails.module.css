@@ -1,0 +1,80 @@
+.container{
+    padding: 84px 120px 176px;
+    display: flex;
+    gap: 32px;
+    background-color: #f5f5f5;
+}
+.img{
+    display: block;
+}
+.wrapper{
+    position: relative;
+  border-radius: 16px; 
+  overflow: hidden;
+    margin-bottom: 32px;
+}
+.rightColumn{
+    border-radius: 16px;
+padding: 32px 24px;
+max-width: 528px;
+background-color: #fff;
+}
+.title{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.33;
+    margin: 0;
+    margin-right: 16px;
+    display: inline;
+}
+.article{
+    display: inline;
+    font-weight: 500;
+line-height: 1.25;
+color: #8d929a;
+}
+.location{
+    display: flex;
+    gap: 4px;
+    font-weight: 500;
+line-height: 1.25;
+align-items: center;
+margin-bottom: 16px;
+margin-top: 8px;
+}
+.price{
+    font-weight: 600;
+font-size: 24px;
+line-height: 1.33;
+color: #00aad4;
+margin: 0;
+}
+.description{
+    font-weight: 500;
+line-height: 1.25;
+margin: 32px 0 68px;
+}
+.infoSection:not(:last-child){
+    margin-bottom: 48px;
+}
+.subtitle{
+    font-weight: 600;
+font-size: 20px;
+line-height: 1.2;
+margin: 0;
+}
+.list{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.item{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.item p{
+    font-weight: 500;
+line-height: 1.25;
+}

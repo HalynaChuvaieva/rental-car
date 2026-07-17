@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 const Header = () => {
   const pathname = usePathname();
-
+  const isCatalogPage = pathname === "/catalog";
   return (
     <header className={css.header}>
       <Link href="/">
@@ -24,7 +24,7 @@ const Header = () => {
           </li>
           <li>
             <Link
-              className={`${css.link} ${pathname.startsWith("/catalog") ? css.active : ""}`}
+              className={`${css.link} ${isCatalogPage ? css.active : ""}`}
               href="/catalog"
             >
               Catalog

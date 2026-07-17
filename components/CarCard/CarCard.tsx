@@ -1,6 +1,7 @@
 import Image from "next/image";
 import css from "./CarCard.module.css";
 import { Car } from "@/types/car"; // Шлях до ваших типів
+import Link from "next/link";
 
 interface CarCardProps {
   car: Car;
@@ -38,7 +39,13 @@ export default function CarCard({ car }: CarCardProps) {
           <li className={css.detailItem}>{formattedMileage} km</li>
         </ul>
 
-        <button className={css.readMoreBtn}>Read more</button>
+        <Link
+          href={`/catalog/${car.id}`}
+          className={css.readMoreBtn}
+          target="_blank"
+        >
+          Read more
+        </Link>
       </div>
     </div>
   );
