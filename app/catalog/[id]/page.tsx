@@ -5,7 +5,7 @@ import {
 } from "@tanstack/react-query";
 import CarDetailsClient from "./CarDetails.client";
 import { Metadata } from "next";
-import { fetchCarById } from "@/lib/api";
+import { fetchCarById } from "@/lib/cars-api";
 
 type CarDetailsProps = {
   params: Promise<{ id: string }>;

@@ -4,7 +4,7 @@ import React from "react";
 import { useInfiniteQuery, keepPreviousData } from "@tanstack/react-query";
 import CarCard from "@/components/CarCard/CarCard";
 import css from "./Catalog.module.css";
-import { fetchCars } from "@/lib/api";
+import { fetchCars } from "@/lib/cars-api";
 import Loader from "@/components/Loader/Loader";
 import LoadingModal from "@/components/LoadingModal/LoadingModal";
 import { useSearchParams } from "next/navigation";

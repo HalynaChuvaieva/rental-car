@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import css from "./Filters.module.css";
-import { fetchFiltersData } from "@/lib/api";
+import { fetchFiltersData } from "@/lib/cars-api";
 import CustomSelect, { Option } from "@/components/CustomSelect/CustomSelect";
 
 export default function Filters() {

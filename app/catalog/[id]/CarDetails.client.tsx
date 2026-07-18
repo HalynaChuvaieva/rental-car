@@ -3,10 +3,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import Image from "next/image";
-import { fetchCarById } from "@/lib/api";
+import { fetchCarById } from "@/lib/cars-api";
 import Loader from "@/components/Loader/Loader";
 import css from "./CarDetails.module.css";
 import { Car } from "@/types/car";
+import BookingForm from "@/components/BookingForm/BookingForm";
 
 export default function CarDetailsClient() {
   const { id } = useParams<{ id: string }>();
@@ -38,6 +39,7 @@ export default function CarDetailsClient() {
             height={512}
           />
         </div>
+        <BookingForm id={id} />
       </div>
       <div className={css.rightColumn}>
         <div className={css.headerInfo}>

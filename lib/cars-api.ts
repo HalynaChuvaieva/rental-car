@@ -1,6 +1,5 @@
 import { Car } from "@/types/car";
 import axios from "axios";
-
 axios.defaults.baseURL = "https://car-rental-api.goit.study";
 
 export interface FetchCarsArgs {

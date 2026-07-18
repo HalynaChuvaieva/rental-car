@@ -1,0 +1,148 @@
+.formContainer{
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    width: 640px;
+    min-height: 424px;
+}
+.title{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.2;
+    margin: 0;
+}
+.subtitle{
+    font-weight: 500;
+    line-height: 1.25;
+    color: #8d929a;
+    margin-top: 8px;
+    margin-bottom: 24px;
+}
+.inputGroup{
+    margin-bottom: 16px;
+}
+.inputGroup svg{
+    fill: #EC383B;
+}
+.fieldWrapper {
+  position: relative;
+  display: block; 
+}
+.input, .textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 12px 20px;
+  min-height: 48px;
+  font-weight: 500;
+  line-height: 1.25;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.textarea {
+  resize: none;
+  min-height: 88px;
+}
+
+.label {
+  position: absolute;
+  left: 16px;
+  top: 15px;
+  color: #8d929a;
+  font-weight: 500;
+line-height: 1.25;
+font-size: 16px;
+line-height: 1.33;
+  pointer-events: none;
+  transition: all 0.2s ease-out;
+  border-radius: 8px;
+padding: 0px 8px;
+background-color: transparent;
+}
+
+.input:focus ~ .label,
+.input:not(:placeholder-shown) ~ .label,
+.textarea:focus ~ .label,
+.textarea:not(:placeholder-shown) ~ .label {
+  top: -8px; 
+  left: 7px;
+  font-size: 12px;
+  background-color: #f7f7f7; /* ❗ Додаємо сірий фон ТІЛЬКИ коли мітка лежить на рамці */
+}
+
+
+.hasError .input,
+.hasError .textarea {
+  border-color: #ec383b; /* Червона рамка */
+  background-color: #ffdfdf;/* Рожевий фон */
+  padding-right: 12px; /* Місце для іконки, щоб текст на неї не наїжджав */
+}
+.textarea::placeholder {
+  color: #8d929a;
+  opacity: 1; /* Для Firefox */
+}
+.hasError .textarea::placeholder {
+  color: #8d929a;
+}
+
+/* 2. Центруємо іконку ТІЛЬКИ в текстареї (за допомогою селектора ~) */
+.textarea ~ .errorIcon {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hasError .input:focus ~ .label,
+.hasError .input:not(:placeholder-shown) ~ .label {
+  color: #EC383B; /* ❗ Тепер мітка стає червоною тільки зверху */
+  background-color: #ffdfdf; 
+}
+/* Лейбла перекриває червону рамку білим фоном */
+.hasError .input:focus ~ .label,
+.hasError .input:not(:placeholder-shown) ~ .label,
+.hasError .textarea:focus ~ .label,
+.hasError .textarea:not(:placeholder-shown) ~ .label {
+  background-color: #ffdfdf; /* Фон форми, щоб перекрити червону рамку */
+}
+
+/* Іконка помилки (Svg) */
+.errorIcon {
+  position: absolute;
+  right: 16px;
+  top: 14px;/* Вирівнюємо по вертикалі */
+  width: 20px;
+  height: 20px;
+}
+
+/* Текст під полем */
+.errorText {
+  color: #EC383B;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+/* Кнопка */
+.submitBtn {
+  width: 100%;
+  max-height: 44px;
+  background-color: #00aad4; 
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+line-height: 1.25;
+  transition: background-color 250ms cubic-bezier(0.39, 0.575, 0.565, 1);
+   margin-top:8px;
+}
+.submitBtn:hover {
+  background-color: #0095ba;
+}

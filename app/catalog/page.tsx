@@ -6,7 +6,7 @@ import {
 import CatalogClient from "./CatalogClient";
 import Filters from "@/components/Filters/Filters";
 import css from "./Catalog.module.css";
-import { fetchCars } from "@/lib/api";
+import { fetchCars } from "@/lib/cars-api";
 
 export default async function CatalogPage({
   searchParams,
