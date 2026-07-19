@@ -80,7 +80,7 @@ background-color: transparent;
 .hasError .textarea {
   border-color: #ec383b; /* Червона рамка */
   background-color: #ffdfdf;/* Рожевий фон */
-  padding-right: 12px; /* Місце для іконки, щоб текст на неї не наїжджав */
+  padding-right: 48px; /* Місце для іконки, щоб текст на неї не наїжджав */
 }
 .textarea::placeholder {
   color: #8d929a;

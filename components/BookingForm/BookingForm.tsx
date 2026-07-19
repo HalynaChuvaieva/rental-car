@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "izitoast/dist/css/iziToast.min.css";
@@ -22,6 +23,7 @@ const BookingSchema = Yup.object().shape({
 });
 
 export default function BookingForm({ id }: FormProps) {
+  const STORAGE_KEY = `booking_draft_${id}`;
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -42,6 +44,7 @@ export default function BookingForm({ id }: FormProps) {
           message: response?.message || "Booking request sent successfully!",
         });
         resetForm();
+        localStorage.removeItem(STORAGE_KEY);
       } catch (error) {
         iziToast.error({ title: "Error", message: "Failed to send request." });
       } finally {
@@ -49,6 +52,23 @@ export default function BookingForm({ id }: FormProps) {
       }
     },
   });
+  useEffect(() => {
+    const savedData = localStorage.getItem(STORAGE_KEY);
+    if (savedData) {
+      try {
+        const parsedData = JSON.parse(savedData);
+        formik.setValues(parsedData);
+      } catch (error) {
+        console.error("Error reading from localStorage", error);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (formik.values.name || formik.values.email || formik.values.comment) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(formik.values));
+    }
+  }, [formik.values, STORAGE_KEY]);
 
   return (
     <div className={css.formContainer}>
