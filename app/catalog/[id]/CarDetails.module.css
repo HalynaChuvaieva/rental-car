@@ -3,6 +3,7 @@
     display: flex;
     gap: 32px;
     background-color: #f5f5f5;
+    justify-content: center;
 }
 .img{
     display: block;
