@@ -150,7 +150,6 @@ export default function BookingForm({ id }: FormProps) {
               onBlur={formik.handleBlur}
               disabled={formik.isSubmitting}
             />
-            {/* Іконка йде одразу після textarea */}
             {formik.touched.comment && formik.errors.comment && (
               <svg className={css.errorIcon} width="20" height="20">
                 <use href="/sprite.svg#icon-error"></use>

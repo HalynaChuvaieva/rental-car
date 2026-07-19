@@ -7,7 +7,29 @@ import CatalogClient from "./CatalogClient";
 import Filters from "@/components/Filters/Filters";
 import css from "./Catalog.module.css";
 import { fetchCars } from "@/lib/cars-api";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Catalog | Choose Your Car",
+  description:
+    "Browse our extensive catalog of premium and economy cars available for rent.",
+  openGraph: {
+    title: "Catalog | Choose Your Car",
+    description:
+      "Browse our extensive catalog of premium and economy cars available for rent.",
+    url: "https://rental-car-sable.vercel.app",
+    siteName: "Car Booking Service",
+    images: [
+      {
+        url: "https://imgcdn.zigwheels.vn/medium/gallery/exterior/9/958/honda-hr-v-18808.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Car Catalog list",
+      },
+    ],
+    type: "website",
+  },
+};
 export default async function CatalogPage({
   searchParams,
 }: {

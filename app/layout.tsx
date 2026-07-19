@@ -16,13 +16,6 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const inter = Inter({
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "700", "500", "600"],
-  variable: "--second-family",
-  display: "swap",
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{

@@ -23,6 +23,8 @@ export async function generateMetadata({
     openGraph: {
       title: `${car.brand} ${car.model} for rent`,
       description: car.description,
+      url: "https://rental-car-sable.vercel.app",
+      siteName: "Car Booking Service",
       images: [
         {
           url: car.img,
@@ -31,6 +33,7 @@ export async function generateMetadata({
           alt: `${car.brand} ${car.model}`,
         },
       ],
+      type: "website",
     },
   };
 }

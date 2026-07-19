@@ -1,6 +1,6 @@
 import Image from "next/image";
 import css from "./CarCard.module.css";
-import { Car } from "@/types/car"; // Шлях до ваших типів
+import { Car } from "@/types/car";
 import Link from "next/link";
 
 interface CarCardProps {
